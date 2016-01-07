@@ -25,7 +25,7 @@ class Checkin extends CI_Controller {
                 $temp .= "<td>".$value['prename']." ".$value['name']." ".$value['surname']."</td>";
                 $temp .= "<td>".$value['nickname']."</td>";
                 $temp .= "<td>".$value['school']."</td>";
-                $temp .= '<td><a rel="stylesheet" href="checkin/come?id='.$value['id_user'].'" class="btn btn-default">Check In</a></td>';
+                $temp .= '<td><a rel="stylesheet" href="checkin/come?id='.$value['id_user'].'" class="btn btn-success">Check In</a> <a rel="stylesheet" href="checkin/back?id='.$value['id_user'].'" class="btn btn-danger">Check Out</a></td>';
                 $temp .= "</tr>";
             }
             $data['attendees'] = $temp;
@@ -37,6 +37,11 @@ class Checkin extends CI_Controller {
         $this->parser->parse('templates/header', $data);
         $this->parser->parse('checkin', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function come(){
+        $id = $this->input->get('id');
+
     }
 
 }
