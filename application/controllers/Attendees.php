@@ -6,6 +6,7 @@ class Attendees extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('attendees_model');
+        $this->load->model('page_model');
     }
 
     public function index(){
@@ -22,32 +23,6 @@ class Attendees extends CI_Controller {
             $profile = $this->attendees_model->get_attendees();
             $page = 1;
         }
-
-        $data['number_atten'] = $this->attendees_model->count_attendees();
-
-        $temp = '<nav><ul class="pagination">';
-        if($page == 1){
-            $temp .= '<li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
-        }
-        else{
-            $page -= 1;
-            $temp .= '<li><a href="attendees?page='.$page.'" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
-        }
-        for($i=1; $i <= $this->attendees_model->number_page(); $i+=1){
-            if($page == $i - 1)
-                $temp .= '<li class="active"><a href="attendees?page='.$i.'">'.$i.'</a></li>';
-            else
-                $temp .= '<li><a href="attendees?page='.$i.'">'.$i.'</a></li>';
-        }
-        if($page == $this->attendees_model->number_page()){
-            $temp .= '<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
-        }
-        else{
-            $page += 1;
-            $temp .= '<li><a href="attendees?page='.$page.'" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
-        }
-        $temp .= "</ul></nav>";
-        $data['pagination'] = $temp;
 
         /*
             Generate table from result select `Profiles`
@@ -71,6 +46,8 @@ class Attendees extends CI_Controller {
         }
 
         $data['table_attendees'] = $temp;
+        $data['pagination'] = $this->page_model->paginate('profiles', 30, 'attendees', $page);
+        $data['number_atten'] = $this->attendees_model->count_attendees();;
 
         $this->parser->parse('templates/header', $data);
         $this->parser->parse('attendees', $data);
