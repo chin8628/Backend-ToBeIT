@@ -11,16 +11,18 @@ class Attendees extends CI_Controller {
 
     public function index(){
         $data = array(
-                "title" => "Profile | Backend - ToBeIT"
+                "title" => "Attendees Search | Backend - ToBeIT"
             );
 
         //Get a page from get method for set limit to select sql
+        $search = $this->input->get('search');
+        $option = $this->input->get('option');
         if (!empty($this->input->get('page'))){
-            $profile = $this->attendees_model->get_attendees(false, $this->input->get('page'));
+            $profile = $this->attendees_model->get_attendees(30, $search, $option, $this->input->get('page'));
             $page = $this->input->get('page');
         }
         else{
-            $profile = $this->attendees_model->get_attendees();
+            $profile = $this->attendees_model->get_attendees(30, $search, $option, 1);
             $page = 1;
         }
 
@@ -40,17 +42,32 @@ class Attendees extends CI_Controller {
                 $temp .= '<td><a href="http://www.facebook.com" class="btn btn-default" disabled="disabled">Facebook</a></td>';
             }
             $temp .= '<td><a href="attendees/edit?id='.$value['id_user'].'" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a>';
-            $temp .= '<a href="attendees/attendees?id='.$value['id_user'].'" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></a>';
-            $temp .= '<a href="attendees/delete?id='.$value['id_user'].'" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>';
+            $temp .= ' <a href="attendees/profile?id='.$value['id_user'].'" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></a>';
+            $temp .= ' <a href="attendees/delete?id='.$value['id_user'].'" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>';
             $temp .= "</tr>";
         }
 
         $data['table_attendees'] = $temp;
-        $data['pagination'] = $this->page_model->paginate('profiles', 30, 'attendees', $page);
-        $data['number_atten'] = $this->attendees_model->count_attendees();;
+        if($search == "" && $option == "")
+            $data['pagination'] = $this->page_model->paginate('profiles', 30, 'attendees', $page);
+        else
+            $data['pagination'] = "";
+        $data['number_atten'] = $this->attendees_model->count_attendees();
 
         $this->parser->parse('templates/header', $data);
         $this->parser->parse('attendees', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function edit(){
+        $data = array(
+                "title" => "Profile | Backend - ToBeIT"
+            );
+
+        $id = $this->input->get("id");
+
+        $this->parser->parse('templates/header', $data);
+        $this->parser->parse('edit', $data);
         $this->load->view('templates/footer');
     }
 
