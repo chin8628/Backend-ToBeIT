@@ -67,6 +67,8 @@ class Attendees_model extends CI_Model {
 
         public function get_attendees($grab, $search=false, $keyword=false, $page=1){
 
+            //It's search on attendees, If you find function for get profile, just look down.
+
             $grab_offset = (($page - 1) * $grab);
 
             switch ($keyword) {
@@ -89,6 +91,11 @@ class Attendees_model extends CI_Model {
                     return $query->result_array();
             }
 
+        }
+
+        public function get_profile($id){
+            $data = $this->db->get_where('profiles', array('id_user' => $id));
+            return $data->result_array();
         }
 
         public function count_attendees(){
