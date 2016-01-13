@@ -8,6 +8,7 @@ class Checkin extends CI_Controller {
         $this->load->model('Checkin_model');
         $this->load->model('Attendees_model');
         $this->load->model('Class_model');
+        $this->load->model('Food_model');
         $this->load->helper('form');
     }
 
@@ -90,7 +91,8 @@ class Checkin extends CI_Controller {
         $data['chk_thead'] = $temp1;
         $data['chk_tbody'] = $temp2;
 
-        if(isset($room)){
+        //When form was submit will enter into if
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             //Don't swap this sequence of code. I think this is the best!
             $this->Checkin_model->edit_room($id, $room);
             $status = $this->Checkin_model->checkin($id);
@@ -113,7 +115,7 @@ class Checkin extends CI_Controller {
             $data['religion'] = $value['religion'];
         }
 
-        //Generate Class' dopdown
+        //Generate Class's dopdown
         $classroom = $this->Class_model->get_class();
         $options = array("" => "");
         for($i=0; $i < count($classroom); $i++){
@@ -122,6 +124,15 @@ class Checkin extends CI_Controller {
         $student_class = $this->Class_model->get_student_class($id);
         $temp = form_dropdown('classroom', $options, $student_class, 'class="form-control"');
         $data['classroom'] = $temp;
+
+        //Generate Food menu's dropdown
+        $options = array("" => "");
+        $food_menu = $this->Food_model->get_menu_food();
+        for($i=0;$i < count($food_menu); $i++){
+            $options[$food_menu[$i]] = $food_menu[$i];
+        }
+        $menu_of_atten = $this->Food_model->get_food_of_attendee($id);
+        $data['menu_dropdown'] = form_dropdown('menu_food', $options, $menu_of_atten, 'class="form-control"');
 
         $this->parser->parse('templates/header', $data);
         $this->parser->parse('come', $data);

@@ -37,7 +37,7 @@
                         <div class="panel-body">
                             <div class="form-group">
                                 <label for="room">เมนูอาหาร </label>
-                                {menu_food}
+                                {menu_dropdown}
                             </div>
                         </div>
                     </div>
