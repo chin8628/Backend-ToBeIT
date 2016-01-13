@@ -2,6 +2,24 @@
     <div class="container">
         <section class="row col-sm-7">
             <div class="panel panel-default">
+                <div class="panel-heading">สถิติภาพรวม ToBeIT</div>
+                <div class="panel-body">
+                    <p><b>แบ่งจำนวนผู้เข้าร่วมตามเพศ</b></p>
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>ชาย</td>
+                                <td class="col-sm-2 text-center">{checkin_today} คน</td>
+                            </tr>
+                            <tr>
+                                <td>หญิง</td>
+                                <td class="col-sm-2 text-center">{stay_today} คน</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-default">
                 <div class="panel-heading">สถิติประจำวันนี้</div>
                 <div class="panel-body">
                     <table class="table table-bordered">
