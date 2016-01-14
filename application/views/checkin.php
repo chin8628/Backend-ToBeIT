@@ -6,7 +6,7 @@
                 <h1>Check In</h1>
                 <form method="get">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="search" placeholder="หมายเลขประจำตัว, ชื่อ, นามสกุล, ชื่อเล่น">
+                        <input type="text" class="form-control" name="search" placeholder="หมายเลขประจำตัว, ชื่อ, นามสกุล, ชื่อเล่น" autofocus>
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
