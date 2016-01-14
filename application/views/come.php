@@ -59,7 +59,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">เลือกเอกสารการเรียน</div>
                         <div class="panel-body">
-                            {sheet_dropdown}
+                            {sheet_menu}
                         </div>
                     </div>
                 </div>

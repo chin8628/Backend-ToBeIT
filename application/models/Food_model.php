@@ -28,4 +28,32 @@ class Food_model extends CI_Model {
         }
     }
 
+    public function save_food_attendee($id, $food) {
+        $this->db->select('*');
+        $this->db->where('id', $id);
+        $this->db->from('checkin');
+        $cnt = $this->db->count_all_results();
+        if ($cnt == 1) {
+            $this->db->where('id', $id);
+            $this->db->update('checkin', array('food' => $food));
+        }
+        else if ($cnt == 0){
+            $this->db->insert('checkin', array("id" => $id, "food" => $food));
+        }
+        else {
+            return "ERR can count record of this ID more than one.";
+        }
+    }
+
+    public function count_order_food() {
+        $menu = $this->get_menu_food();
+        foreach ($menu as $key => $value) {
+            $this->db->select('*');
+            $this->db->where('food', $value);
+            $this->db->from('checkin');
+            $cnt[$key] = $this->db->count_all_results();
+        }
+        return $cnt;
+    }
+
 }

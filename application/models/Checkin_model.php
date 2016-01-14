@@ -144,15 +144,19 @@ class Checkin_model extends CI_Model {
         $date = $this->Date_model->is_now_on_event();
         $number_event_day = $this->Date_model->number_event_day();
 
-        $cnt = 0;
-        $data = $this->db->get('checkin');
-        foreach ($data->result_array() as $value) {
-            if ($value['checkin'][$date - 1] != 0){
-                $cnt += 1;
+        if ($date != 0) {
+            $cnt = 0;
+            $data = $this->db->get('checkin');
+            foreach ($data->result_array() as $value) {
+                if ($value['checkin'][$date - 1] != 0){
+                    $cnt += 1;
+                }
             }
+            return $cnt;
         }
-
-        return $cnt;
+        else {
+            return 0;
+        }
 
     }
 
@@ -161,15 +165,19 @@ class Checkin_model extends CI_Model {
         $date = $this->Date_model->is_now_on_event();
         $number_event_day = $this->Date_model->number_event_day();
 
-        $cnt = 0;
-        $data = $this->db->get('checkin');
-        foreach ($data->result_array() as $value) {
-            if ($value['checkin'][$date - 1] == 1){
-                $cnt += 1;
+        if ($date != 0){
+            $cnt = 0;
+            $data = $this->db->get('checkin');
+            foreach ($data->result_array() as $value) {
+                if ($value['checkin'][$date - 1] == 1){
+                    $cnt += 1;
+                }
             }
+            return $cnt;
         }
-
-        return $cnt;
+        else {
+            return 0;
+        }
 
     }
 
@@ -178,15 +186,19 @@ class Checkin_model extends CI_Model {
         $date = $this->Date_model->is_now_on_event();
         $number_event_day = $this->Date_model->number_event_day();
 
-        $cnt = 0;
-        $data = $this->db->get('checkin');
-        foreach ($data->result_array() as $value) {
-            if ($value['checkin'][$date - 1] == 2){
-                $cnt += 1;
+        if($date != 0){
+            $cnt = 0;
+            $data = $this->db->get('checkin');
+            foreach ($data->result_array() as $value) {
+                if ($value['checkin'][$date - 1] == 2){
+                    $cnt += 1;
+                }
             }
+            return $cnt;
         }
-
-        return $cnt;
+        else {
+            return 0;
+        }
 
     }
 

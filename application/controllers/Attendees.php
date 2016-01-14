@@ -11,6 +11,7 @@ class Attendees extends CI_Controller {
         $this->load->model('Date_model');
         $this->load->model('Checkin_model');
         $this->load->model('Class_model');
+        $this->load->model('Sheet_model');
     }
 
     public function index(){
@@ -207,6 +208,31 @@ class Attendees extends CI_Controller {
         $temp = form_dropdown('classroom', $options, $student_class, 'class="form-control"');
         $data['classroom'] = $temp;
 
+        //Generate Sheet's display
+        $sheet = $this->Sheet_model->get_sheet();
+        $sheet_atten = $this->Sheet_model->get_sheet_of_attendee_today($id);
+        $temp = '<div class="form-horizontal">';
+        foreach ($sheet as $key => $value) {
+            if ($key >= floor(count($sheet) / 2) + 1 || $key == 0) {
+                $temp .= '<div class="col-sm-6">';
+            }
+            $temp .= '<div class="form-group inline">';
+            $temp .= '<label for="sheet'.$key.'" class="col-sm-5 control-label">'.$value.'</label>';
+            $temp .= '<div class="col-sm-5">';
+            if (array_key_exists($value, $sheet_atten)) {
+                $temp .= '<input type="number" class="form-control" name="sheet'.$key.'" value='.$sheet_atten[$value].' min=0>';
+            }
+            else {
+                $temp .= '<input type="number" class="form-control" name="sheet'.$key.'" min=0>';
+            }
+            $temp .= '</div>';
+            $temp .= "</div>";
+            if ($key >= floor(count($sheet) / 2) || $key == count($sheet) - 1) {
+                $temp .= "</div>";
+            }
+        }
+        $temp .= "</div>";
+        $data['sheet_menu'] = $temp;
 
         $this->parser->parse('templates/header', $data);
         $this->parser->parse('edit', $data);
@@ -256,7 +282,19 @@ class Attendees extends CI_Controller {
         $this->db->where('id', $id);
         $this->db->update('checkin', array('room' => $classroom_update));
 
-        //$update_checkin['room'] = $this
+        //Get post from sheet_menu
+        $sheet = $this->Sheet_model->get_sheet();
+        $sheet_today = array();
+        foreach ($sheet as $key => $value) {
+            $name_field = 'sheet'.$key;
+            $order_sheet = $this->input->post($name_field);
+            if ($order_sheet > 0 && $order_sheet != ""){
+                $sheet_today[$value] = $order_sheet;
+            }
+        }
+
+        //Save attendee's order sheet
+        echo $this->Sheet_model->save_sheet_attendee($id, $sheet_today);
 
         redirect('attendees');
 

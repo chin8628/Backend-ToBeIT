@@ -8,9 +8,8 @@
             <section class="row">
                 <div class="container col-sm-7">
                     <div class="panel panel-default">
+                        <div class="panel-heading">ข้อมูลทั่วไป</div>
                         <div class="panel-body">
-                            <h3><p class="col-sm-offset-0">ข้อมูลทั่วไป</p></h3>
-                            <hr class="thin">
                             <input type="hidden" class="form-control" name="id" value="{id_user}" >
                             <div class="form-group">
                                 <label for="prename" class="col-sm-3 control-label">คำนำหน้า</label>
@@ -90,9 +89,8 @@
                         </div>
                     </div>
                     <div class="panel panel-default">
+                        <div class="panel-heading">การเข้าเรียน</div>
                         <div class="panel-body">
-                            <h3><p>การเข้าเรียน</p></h3>
-                            <hr class="thin">
                             <table class="table table-bordered text-center">
                                 <tbody>
                                     {select_checkin}
@@ -100,13 +98,18 @@
                             </table>
                         </div>
                     </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">เลือกเอกสารการเรียน</div>
+                        <div class="panel-body">
+                            {sheet_menu}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="container col-sm-5 row">
                     <div class="panel panel-default">
+                        <div class="panel-heading">ข้อมูลทางการแพทย์</div>
                         <div class="panel-body">
-                            <h3><p class="col-sm-offset-0">ข้อมูลทางการแพทย์</p></h3>
-                            <hr class="thin">
                             <div class="form-group">
                                 <label for="helth_problem" class="col-sm-3 control-label">ปัญหาทางสุขภาพ</label>
                                 <div class="col-sm-8">
@@ -123,9 +126,8 @@
                     </div>
 
                     <div class="panel panel-default">
+                        <div class="panel-heading">การติดต่อ</div>
                         <div class="panel-body">
-                            <h3><p>การติดต่อ</p></h3>
-                            <hr class="thin">
                             <form class="form-horizontal" method="post">
                                 <div class="form-group">
                                     <label for="phone" class="col-sm-4 control-label">เบอร์โทร</label>
@@ -165,18 +167,16 @@
                     </div>
 
                     <div class="panel panel-default">
+                        <div class="panel-heading">ห้องเรียน</div>
                         <div class="panel-body">
-                            <h3><p>ห้องเรียน</p></h3>
-                            <hr class="thin">
                             <p>เลือกห้องเรียน</p>
                             {classroom}
                         </div>
                     </div>
 
                     <div class="panel panel-default">
+                        <div class="panel-heading">บันทึกผล</div>
                         <div class="panel-body">
-                            <h3><p>บันทึกผล</p></h3>
-                            <hr class="thin">
                             <div class="form-group">
                                 <div class="col-sm-10 col-sm-offset-1">
                                     หมายเหตุ: กรอกข้อมูลในช่องที่มีเครื่องหมายดอกจันทร์ (*) ให้ครบ
