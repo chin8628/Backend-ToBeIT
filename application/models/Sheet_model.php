@@ -39,7 +39,11 @@ class Sheet_model extends CI_Model {
     public function get_sheet_of_attendee_today($id) {
         $today = $this->Date_model->is_now_on_event();
         if ($today != 0){
+            $sheet_today = array();
             $data = $this->db->get_where('checkin', array('id' => $id));
+            if (count($data->result_array()) == 0){
+                return 'ERR';
+            }
             foreach ($data->result_array() as $value) {
                 $sheet_today = json_decode($value['sheet'], TRUE);
             }

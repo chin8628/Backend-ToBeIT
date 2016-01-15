@@ -69,9 +69,11 @@ class Checkin_model extends CI_Model {
                     $checkin .= "1";
                 }
                 else
-                    $checkin .= "0";
+                    $checkin .= $last_checkin[$i];
             }
         }
+
+        echo "aa";
 
         if ($cnt == 0) {
             $this->db->insert('checkin', array("id" => $id, "checkin" => $checkin));
@@ -80,9 +82,9 @@ class Checkin_model extends CI_Model {
             $this->db->where('id', $id);
             $this->db->update('checkin', array("checkin" => $checkin));
         }
-        $data = $this->db->get_where("checkin", array('$id'));
-        return 0;
-
+        else{
+            return 0;
+        }
     }
 
     public function checkout($id) {

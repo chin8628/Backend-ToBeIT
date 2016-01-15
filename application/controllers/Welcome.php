@@ -7,6 +7,7 @@ class Welcome extends CI_Controller {
         parent::__construct();
         $this->load->model('Date_model');
         $this->load->model('Checkin_model');
+        $this->Auth_model->only_logged();
     }
 
 	public function index()

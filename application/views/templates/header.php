@@ -24,6 +24,8 @@
                         <li><a href="<?php echo base_url(); ?>">Home </a></li>
                         <li><a href="<?php echo base_url(); ?>attendees">Attendees </a></li>
                         <li><a href="<?php echo base_url(); ?>checkin">Check In </a></li>
+                        <li><a href="<?php echo base_url(); ?>order">Find Order </a></li>
+                        <li><a href="<?php echo base_url(); ?>auth/logout">Logout </a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->

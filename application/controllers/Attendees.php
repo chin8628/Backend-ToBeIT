@@ -12,6 +12,7 @@ class Attendees extends CI_Controller {
         $this->load->model('Checkin_model');
         $this->load->model('Class_model');
         $this->load->model('Sheet_model');
+        $this->Auth_model->only_logged();
     }
 
     public function index(){
@@ -22,7 +23,16 @@ class Attendees extends CI_Controller {
         //Get a page from get method for set limit to select sql
         $search = $this->input->get('search');
         $option = $this->input->get('option');
-        if (!empty($this->input->get('page'))){
+        $alert = $this->input->get('alert');
+
+        //Generate Alert
+        $data['alert'] = "";
+        if ($alert == 1){
+            $data['alert'] = '<div class="alert alert-success" role="alert">ลบข้อมูลส่วนตัวสำเร็จ!</div>';
+        }
+
+        $wow_hotfix = $this->input->get('page');
+        if (!empty($wow_hotfix)){
             $profile = $this->attendees_model->get_attendees(30, $search, $option, $this->input->get('page'));
             $page = $this->input->get('page');
         }
@@ -219,7 +229,10 @@ class Attendees extends CI_Controller {
             $temp .= '<div class="form-group inline">';
             $temp .= '<label for="sheet'.$key.'" class="col-sm-5 control-label">'.$value.'</label>';
             $temp .= '<div class="col-sm-5">';
-            if (array_key_exists($value, $sheet_atten)) {
+            if ($sheet_atten == "ERR") {
+                $temp .= '<input type="number" class="form-control" name="sheet'.$key.'" min=0>';
+            }
+            else if (array_key_exists($value, $sheet_atten)) {
                 $temp .= '<input type="number" class="form-control" name="sheet'.$key.'" value='.$sheet_atten[$value].' min=0>';
             }
             else {
@@ -297,6 +310,14 @@ class Attendees extends CI_Controller {
         echo $this->Sheet_model->save_sheet_attendee($id, $sheet_today);
 
         redirect('attendees');
+
+    }
+
+    public function delete(){
+
+        $id = $this->input->get('id');
+        $this->attendees_model->delete_attendee($id);
+        redirect('attendees?alert=1');
 
     }
 

@@ -11,6 +11,7 @@ class Checkin extends CI_Controller {
         $this->load->model('Food_model');
         $this->load->model('Sheet_model');
         $this->load->helper('form');
+        $this->Auth_model->only_logged();
     }
 
     public function index()

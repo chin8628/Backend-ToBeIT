@@ -1,5 +1,6 @@
 <body>
     <div class="container">
+        {alert}
         <div class="page-header">
             <h1>Attendees Search <small>({number_atten} คน)</small></h1>
         </div>
@@ -28,7 +29,7 @@
                             <label class="radio-inline">
                                 <input type="radio" name="option" value="nickname"> ชื่อเล่น
                             </label>
-                            <label class="radio-inline">
+                            <!-- <label class="radio-inline">
                                 <input type="radio" name="option" value="school"> โรงเรียน
                             </label>
                             <label class="radio-inline">
@@ -36,7 +37,7 @@
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="option" value="shirt"> ไซส์เสื้อ
-                            </label>
+                            </label> -->
                         </div>
                     </div>
                     <div class="form-group">

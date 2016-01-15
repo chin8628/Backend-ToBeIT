@@ -3,7 +3,7 @@
         {err}
         <div class="panel panel-default">
             <div class="panel-body">
-                <h1>Check In</h1>
+                <h1>Check In</h1><br>
                 <form method="get">
                     <div class="form-group">
                         <input type="text" class="form-control" name="search" placeholder="หมายเลขประจำตัว, ชื่อ, นามสกุล, ชื่อเล่น" autofocus>
