@@ -9,14 +9,15 @@
                         <tbody>
                             <tr>
                                 <td>ชาย</td>
-                                <td class="col-sm-2 text-center">{checkin_today} คน</td>
+                                <td class="col-sm-2 text-center">{stat_male} คน</td>
                             </tr>
                             <tr>
                                 <td>หญิง</td>
-                                <td class="col-sm-2 text-center">{stay_today} คน</td>
+                                <td class="col-sm-2 text-center">{stat_female} คน</td>
                             </tr>
                         </tbody>
                     </table>
+                    <p>จำนวนผู้เข้าร่วมทั้งหมด: {total_attendee}</p>
                 </div>
             </div>
             <div class="panel panel-default">

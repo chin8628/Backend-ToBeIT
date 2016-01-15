@@ -8,11 +8,23 @@ class Stat_model extends CI_Model {
         $this->load->model('Class_model');
     }
 
+    public function total_attendees() {
+        return $this->db->count_all_results('profiles');
+    }
+
     public function stat_male() {
         $this->db->select('*');
         $this->db->where('prename', 'นาย');
         $this->db->from('profiles');
-        echo $this->db->count_all_results();
+        return $this->db->count_all_results();
+    }
+
+    public function stat_female() {
+        $this->db->select('*');
+        $this->db->where('prename', 'นาง');
+        $this->db->or_where('prename', 'นางสาว');
+        $this->db->from('profiles');
+        return $this->db->count_all_results();
     }
 
     public function stat_by_class() {

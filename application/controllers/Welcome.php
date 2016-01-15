@@ -20,6 +20,9 @@ class Welcome extends CI_Controller {
         $data['checkin_today'] = $this->Checkin_model->stat_checkin_today();
         $data['stay_today'] = $this->Checkin_model->stat_stay_today();
         $data['back_home_today'] = $this->Checkin_model->stat_back_home_today();
+        $data['stat_male'] = $this->Stat_model->stat_male();
+        $data['stat_female'] = $this->Stat_model->stat_female();
+        $data['total_attendee'] = $this->Stat_model->total_attendees();
 
         //Generate table of student's number
         $number_std_class = $this->Stat_model->stat_by_class();
