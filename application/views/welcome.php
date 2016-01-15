@@ -1,6 +1,6 @@
 <body>
     <div class="container">
-        <section class="row col-sm-7">
+        <section class="col-sm-7">
             <div class="panel panel-default">
                 <div class="panel-heading">สถิติภาพรวม ToBeIT</div>
                 <div class="panel-body">
@@ -36,6 +36,18 @@
                                 <td>จำนวนคนกลับบ้านแล้วประจำวันนี้</td>
                                 <td class="col-sm-2 text-center">{back_home_today} คน</td>
                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <section class="col-sm-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">จำนวนนักเรียนในแต่ละห้องเรียน</div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <tbody>
+                            {number_std_class}
                         </tbody>
                     </table>
                 </div>
