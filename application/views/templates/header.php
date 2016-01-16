@@ -3,6 +3,8 @@
     <head>
         <title>{title}</title>
 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <?php echo link_tag("asset/css/bootstrap.min.css"); ?>
         <script src="<?php echo base_url(); ?>asset/js/jquery.js"></script>
         <script src="<?php echo base_url(); ?>asset/js/bootstrap.min.js"></script>
@@ -25,6 +27,8 @@
                         <li><a href="<?php echo base_url(); ?>attendees">Attendees </a></li>
                         <li><a href="<?php echo base_url(); ?>checkin">Check In </a></li>
                         <li><a href="<?php echo base_url(); ?>order">Find Order </a></li>
+                        <li><a href="<?php echo base_url(); ?>registration">Registration </a></li>
+                        <li><a href="<?php echo base_url(); ?>report">Report </a></li>
                         <li><a href="<?php echo base_url(); ?>auth/logout">Logout </a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->

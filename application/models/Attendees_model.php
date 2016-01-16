@@ -112,4 +112,20 @@ class Attendees_model extends CI_Model {
         return 0;
     }
 
+    public function registration($insert_data) {
+        $text = $insert_data['name'] . $insert_data['surname'];
+        $this->db->insert('users', array('email' => sha1($text), 'password' => ' d969831eb8a99cff8c02e681f43289e5d3d69664'));
+        $data = $this->db->get_where('users', array('email' => sha1($text)));
+        foreach ($data->result_array() as $key => $value) {
+            $insert_data['id_user'] = $value['id'];
+            $insert_data['id_student'] = sprintf("%04d", $value['id']);
+        }
+        $this->db->insert('profiles', $insert_data);
+        return $insert_data['id_user'];
+    }
+
+    public function get_id_student($id) {
+        return sprintf("%04d", $id);
+    }
+
 }

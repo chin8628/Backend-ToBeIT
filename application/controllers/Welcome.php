@@ -7,6 +7,7 @@ class Welcome extends CI_Controller {
         parent::__construct();
         $this->load->model('Date_model');
         $this->load->model('Checkin_model');
+        $this->load->model('Food_model');
         $this->load->model('Stat_model');
         $this->Auth_model->only_logged();
     }
@@ -34,6 +35,17 @@ class Welcome extends CI_Controller {
             $temp .= '</tr>';
         }
         $data['number_std_class'] = $temp;
+
+        //Generate table of number menu's order
+        $order = $this->Food_model->count_order_food();
+        $temp = "";
+        foreach ($order as $key => $value) {
+            $temp .= "<tr>";
+            $temp .= '<td>'.$key.'</td>';
+            $temp .= '<td class="col-sm-2 text-center">'.$value.' คน</td>';
+            $temp .= '</tr>';
+        }
+        $data['order_menu'] = $temp;
 
 		$this->parser->parse('templates/header', $data);
 		$this->parser->parse('welcome', $data);

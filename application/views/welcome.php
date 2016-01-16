@@ -53,6 +53,16 @@
                     </table>
                 </div>
             </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">จำนวนเมนูอาหารที่สั่ง</div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <tbody>
+                            {order_menu}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </section>
     </div>
 </body>

@@ -46,14 +46,24 @@ class Food_model extends CI_Model {
     }
 
     public function count_order_food() {
+        //return number of menu's order by menu
         $menu = $this->get_menu_food();
         foreach ($menu as $key => $value) {
             $this->db->select('*');
             $this->db->where('food', $value);
             $this->db->from('checkin');
-            $cnt[$key] = $this->db->count_all_results();
+            $cnt[$value] = $this->db->count_all_results();
         }
         return $cnt;
+    }
+
+    public function get_order_food($menu) {
+        $this->db->select('*');
+        $this->db->from('profiles');
+        $this->db->join('checkin', 'profiles.id_user = checkin.id', 'inner');
+        $this->db->where('checkin.food', $menu);
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
 }
