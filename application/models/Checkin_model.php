@@ -166,7 +166,6 @@ class Checkin_model extends CI_Model {
 
         $date = $this->Date_model->is_now_on_event();
         $number_event_day = $this->Date_model->number_event_day();
-
         if ($date != 0){
             $cnt = 0;
             $data = $this->db->get('checkin');

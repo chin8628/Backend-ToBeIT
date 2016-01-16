@@ -316,8 +316,12 @@ class Attendees extends CI_Controller {
     public function delete(){
 
         $id = $this->input->get('id');
-        $this->attendees_model->delete_attendee($id);
-        redirect('attendees?alert=1');
+        $confirm = $this->input->get('confirm');
+
+        if ($confirm == 'true'){
+            $this->attendees_model->delete_attendee($id);
+            redirect('attendees?alert=1');
+        }
 
     }
 

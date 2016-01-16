@@ -26,14 +26,20 @@ class Welcome extends CI_Controller {
         $data['total_attendee'] = $this->Stat_model->total_attendees();
 
         //Generate table of student's number
-        $number_std_class = $this->Stat_model->stat_by_class();
+        $number_std_class = $this->Class_model->number_attendee_by_class();
         $temp = "";
+        $total = 0;
         foreach ($number_std_class as $key => $value) {
             $temp .= "<tr>";
             $temp .= '<td>ห้อง '.$key.'</td>';
             $temp .= '<td class="col-sm-2 text-center">'.$value.' คน</td>';
             $temp .= '</tr>';
+            $total += $value;
         }
+        $temp .= "<tr>";
+        $temp .= '<td>รวมทั้งหมด </td>';
+        $temp .= '<td class="col-sm-2 text-center">'.$total.' คน</td>';
+        $temp .= '</tr>';
         $data['number_std_class'] = $temp;
 
         //Generate table of number menu's order
