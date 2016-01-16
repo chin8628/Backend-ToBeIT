@@ -25,4 +25,13 @@ class Class_model extends CI_Model {
         }
     }
 
+    public function list_attendee_in_room($room) {
+        $this->db->select('*');
+        $this->db->from('profiles');
+        $this->db->join('checkin', 'profiles.id_user = checkin.id', 'inner');
+        $this->db->where('checkin.room', $room);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
 }
