@@ -143,7 +143,7 @@
                                     <div class="col-sm-7">
                                         <select name="trip" class="form-control">
                                             <option value="0">ไม่ระบุ</option>
-                                            <option value="1" selected="selected">ผู้ปกครองมาส่ง</option>
+                                            <option value="1">ผู้ปกครองมาส่ง</option>
                                             <option value="2">รถไฟ</option>
                                             <option value="3">Airport Rail Link (ARL)</option>
                                             <option value="4">รถตู้</option>
@@ -163,7 +163,7 @@
                                             <option value="3">Airport Rail Link (ARL)</option>
                                             <option value="4">รถตู้</option>
                                             <option value="5">รถประจำทาง</option>
-                                            <option value="6" selected="selected">รถสองแถว</option>
+                                            <option value="6">รถสองแถว</option>
                                             <option value="7">อื่นๆ</option>
                                         </select>
                                     </div>
