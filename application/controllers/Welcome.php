@@ -53,6 +53,52 @@ class Welcome extends CI_Controller {
         }
         $data['order_menu'] = $temp;
 
+        //Generate stat another day
+        $checkin_by_day = $this->Checkin_model->stat_checkin();
+        $stay_by_day = $this->Checkin_model->stat_stay();
+        $back_home_by_day = $this->Checkin_model->stat_back_home();
+        $temp = '<ul class="nav nav-tabs" role="tablist">';
+        foreach ($checkin_by_day as $key => $value) {
+            $temp .= '<li role="presentation" ';
+            $day = $key+1;
+            if ($key == 0) {
+                $temp .= 'class="active"';
+            }
+            $temp .= '><a href="#stat_'.$day.'" aria-controls="stat_'.$day.'" role="tab" data-toggle="tab">วันที่ '.$day.'</a></li>';
+        }
+        $temp .= '</ul>';
+        $temp .= '<div class="tab-content">';
+        foreach ($checkin_by_day as $key => $value) {
+            $temp .= '<div role="tabpanel" class="tab-pane';
+            $day = $key+1;
+            if ($key == 0) {
+                $temp .= ' active';
+            }
+            $temp .= '" id="stat_'.$day.'">';
+            $temp .= '<div class="panel panel-default">';
+            $temp .= '<div class="panel-body">';
+            $temp .= '<table class="table table-bordered">';
+            $temp .= '<tbody>';
+            $temp .= '<tr>';
+            $temp .= '<td>จำนวนคนทั้งหมด</td>';
+            $temp .= '<td class="col-sm-2 text-center">'.$checkin_by_day[$key].' คน</td>';
+            $temp .= '</tr>';
+            $temp .= '<tr>';
+            $temp .= '<td>จำนวนคนเช็คอินมาเรียน</td>';
+            $temp .= '<td class="col-sm-2 text-center">'.$stay_by_day[$key].'  คน</td>';
+            $temp .= '</tr>';
+            $temp .= '<tr>';
+            $temp .= '<td>จำนวนคนกลับบ้านแล้ว</td>';
+            $temp .= '<td class="col-sm-2 text-center">'.$back_home_by_day[$key].' คน</td>';
+            $temp .= '</tr>';
+            $temp .= '</tbody>';
+            $temp .= '</table>';
+            $temp .= '</div>';
+            $temp .= '</div>';
+            $temp .= '</div>';
+        }
+        $data['stat_another_day'] = $temp;
+
 		$this->parser->parse('templates/header', $data);
 		$this->parser->parse('welcome', $data);
 		$this->load->view('templates/footer');

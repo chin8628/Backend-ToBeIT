@@ -247,6 +247,32 @@ class Attendees extends CI_Controller {
         $temp .= "</div>";
         $data['sheet_menu'] = $temp;
 
+        //Generate checkin time
+        $time_checkin = $this->Checkin_model->get_checkin_time($id);
+        $temp = "";
+        if (!empty($time_checkin)) {
+            foreach ($time_checkin as $key => $value) {
+                $temp .= '<li class="list-group-item">วันที่ '.$value['date'].' เวลา '.$value['time'].'</li>';
+            }
+            $data['checkin_time'] = $temp;
+        }
+        else{
+            $data['checkin_time'] = 'ไม่มีข้อมูล';
+        }
+
+        //Generate checkout time
+        $time_checkout = $this->Checkin_model->get_checkout_time($id);
+        $temp = "";
+        if (!empty($time_checkout)){
+            foreach ($time_checkout as $key => $value) {
+                $temp .= '<li class="list-group-item">วันที่ '.$value['date'].' เวลา '.$value['time'].'</li>';
+            }
+            $data['checkout_time'] = $temp;
+        }
+        else{
+            $data['checkout_time'] = 'ไม่มีข้อมูล';
+        }
+
         $this->parser->parse('templates/header', $data);
         $this->parser->parse('edit', $data);
         $this->load->view('templates/footer');

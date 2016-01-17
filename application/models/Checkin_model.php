@@ -233,4 +233,96 @@ class Checkin_model extends CI_Model {
 
     }
 
+    public function stat_checkin(){
+
+        $date = $this->Date_model->is_now_on_event();
+        $number_event_day = $this->Date_model->number_event_day();
+
+        $i = 0;
+        $cnt_array = array();
+        for($i=0; $i < $date; $i++) {
+            if ($date != 0) {
+                $cnt = 0;
+                $data = $this->db->get('checkin');
+                foreach ($data->result_array() as $value) {
+                    if ($value['checkin'][$i] != 0){
+                        $cnt += 1;
+                    }
+                }
+                $cnt_array[$i] = $cnt;
+            }
+            else {
+                return 0;
+            }
+        }
+        return $cnt_array;
+
+    }
+
+    public function stat_stay(){
+
+        $date = $this->Date_model->is_now_on_event();
+        $number_event_day = $this->Date_model->number_event_day();
+
+        $i = 0;
+        $cnt_array = array();
+        for($i = 0; $i < $date; $i++){
+            if ($date != 0){
+                $cnt = 0;
+                $data = $this->db->get('checkin');
+                foreach ($data->result_array() as $value) {
+                    if ($value['checkin'][$i] == 1){
+                        $cnt += 1;
+                    }
+                }
+                $cnt_array[$i] = $cnt;
+            }
+            else {
+                return 0;
+            }
+        }
+        return $cnt_array;
+
+    }
+
+    public function stat_back_home(){
+
+        $date = $this->Date_model->is_now_on_event();
+        $number_event_day = $this->Date_model->number_event_day();
+
+        $i = 0;
+        $cnt_array=  array();
+        for($i=0; $i < $date; $i++){
+            if($date != 0){
+                $cnt = 0;
+                $data = $this->db->get('checkin');
+                foreach ($data->result_array() as $value) {
+                    if ($value['checkin'][$i] == 2){
+                        $cnt += 1;
+                    }
+                }
+                $cnt_array[$i] = $cnt;
+            }
+            else {
+                return 0;
+            }
+        }
+        return $cnt_array;
+
+    }
+
+    public function get_checkin_time($id) {
+
+        $data = $this->db->get_where('time_checkin', array('id_user' => $id, 'type' => 'checkin'));
+        return $data->result_array();
+
+    }
+
+    public function get_checkout_time($id) {
+
+        $data = $this->db->get_where('time_checkin', array('id_user' => $id, 'type' => 'checkout'));
+        return $data->result_array();
+
+    }
+
 }

@@ -41,6 +41,17 @@
                     </table>
                 </div>
             </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">สถิติประจำวันอื่น ๆ</div>
+                <div class="panel-body">
+                    <div>
+
+                        {stat_another_day}
+
+                    </div>
+                </div>
+            </div>
         </section>
         <section class="col-sm-5">
             <div class="panel panel-default">

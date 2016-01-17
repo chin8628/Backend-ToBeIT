@@ -175,6 +175,20 @@
                     </div>
 
                     <div class="panel panel-default">
+                        <div class="panel-heading">รายละเอียดการเข้าเรียน และเช็คออก</div>
+                        <div class="panel-body">
+                            <p><b>รายละเอียดการเช็คเข้าเรียน</b></p>
+                            <ul class="list-group">
+                                {checkin_time}
+                            </ul>
+                            <p><b>รายละเอียดการเช็คออก</b></p>
+                            <ul class="list-group">
+                                {checkout_time}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
                         <div class="panel-heading">บันทึกผล</div>
                         <div class="panel-body">
                             <div class="form-group">
