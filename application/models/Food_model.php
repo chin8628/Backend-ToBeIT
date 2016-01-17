@@ -47,23 +47,46 @@ class Food_model extends CI_Model {
 
     public function count_order_food() {
         //return number of menu's order by menu
+        $number_day_event = $this->Date_model->is_now_on_event();
         $menu = $this->get_menu_food();
         foreach ($menu as $key => $value) {
             $this->db->select('*');
             $this->db->where('food', $value);
             $this->db->from('checkin');
-            $cnt[$value] = $this->db->count_all_results();
+            $data = $this->db->get();
+            $cnt = 0;
+            foreach ($data->result_array() as $value2) {
+                $food_by_day = $value2['checkin'][$number_day_event - 1];
+                if ($food_by_day == 1){
+                    $cnt++;
+                }
+            }
+            $cnt_arr[$value] = $cnt;
         }
-        return $cnt;
+        return $cnt_arr;
     }
 
     public function get_order_food($menu) {
+        $number_day_event = $this->Date_model->is_now_on_event();
         $this->db->select('*');
         $this->db->from('profiles');
         $this->db->join('checkin', 'profiles.id_user = checkin.id', 'inner');
         $this->db->where('checkin.food', $menu);
         $query = $this->db->get();
-        return $query->result_array();
+        $result_array = array();
+        foreach ($query->result_array() as $key => $value) {
+            $checkin_state = $value['checkin'][$number_day_event - 1];
+            if ($checkin_state == 1){
+                array_push($result_array, $value);
+            }
+        }
+        return $result_array;
+    }
+
+    public function clear_food(){
+
+        $this->db->update('checkin', array('food' => ""));
+
     }
 
 }

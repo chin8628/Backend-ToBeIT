@@ -29,6 +29,7 @@
                         <li><a href="<?php echo base_url(); ?>order">Find Order </a></li>
                         <li><a href="<?php echo base_url(); ?>registration">Registration </a></li>
                         <li><a href="<?php echo base_url(); ?>report">Report </a></li>
+                        <li><a href="<?php echo base_url(); ?>setting">Setting </a></li>
                         <li><a href="<?php echo base_url(); ?>auth/logout">Logout </a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->

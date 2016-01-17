@@ -22,6 +22,15 @@ class Auth_model extends CI_Model {
 
     }
 
+    public function check_password($password){
+
+        if ($password == "ToBeIT59P@ss"){
+            return True;
+        }
+        return False;
+
+    }
+
     public function only_logged() {
 
         if (!$this->session->has_userdata('token')){
