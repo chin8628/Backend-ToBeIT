@@ -47,7 +47,12 @@ class Sheet_model extends CI_Model {
             foreach ($data->result_array() as $value) {
                 $sheet_today = json_decode($value['sheet'], TRUE);
             }
-            return json_decode($sheet_today[$today], TRUE);
+            if (array_key_exists($today, $sheet_today)) {
+                return json_decode($sheet_today[$today], TRUE);
+            }
+            else {
+                return 'ERR';
+            }
         }
         else {
             return 'ERR';
