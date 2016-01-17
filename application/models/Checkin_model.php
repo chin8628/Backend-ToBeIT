@@ -39,6 +39,30 @@ class Checkin_model extends CI_Model {
         }
     }
 
+    public function add_checkin_time($id, $type) {
+
+        //Type 1 is checkin
+        //Type 0 is checkout
+
+        if ($type == 1) {
+            $type = "checkin";
+        }
+        else if ($type == 0) {
+            $type = "checkout";
+        }
+
+        $insert_data = array(
+                            'id_user' => $id,
+                            'type' => $type,
+                            'date' => date("d.m.y"),
+                            'time' => date("H:i:s")
+                        );
+
+        $this->db->insert('time_checkin', $insert_data);
+        return 0;
+
+    }
+
     public function checkin($id) {
 
         $this->db->select('*');
@@ -47,6 +71,9 @@ class Checkin_model extends CI_Model {
         $cnt = $this->db->count_all_results();
 
         $num_event_day = $this->Date_model->number_event_day();
+
+        //Insert log time of checkin into DB
+        $this->add_checkin_time($id, 1);
 
         $data = $this->db->get_where('checkin', array('id' => $id));
         $last_checkin = "";
@@ -95,6 +122,9 @@ class Checkin_model extends CI_Model {
         $cnt = $this->db->count_all_results();
 
         $num_event_day = $this->Date_model->number_event_day();
+
+        //Insert log time of checkin into DB
+        $this->add_checkin_time($id, 0);
 
         $data = $this->db->get_where('checkin', array('id' => $id));
         $last_checkin = "";
