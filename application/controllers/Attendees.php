@@ -348,6 +348,24 @@ class Attendees extends CI_Controller {
             $this->attendees_model->delete_attendee($id);
             redirect('attendees?alert=1');
         }
+        else {
+            redirect('attendees/confirm_remove?id='.$id);
+        }
+
+    }
+
+    public function confirm_remove() {
+
+        $data = array(
+                "title" => "Confirm | Backend - ToBeIT"
+            );
+
+        $id = $this->input->get("id");
+        $data['id'] = $id;
+
+        $this->parser->parse('templates/header', $data);
+        $this->parser->parse('confirm', $data);
+        $this->load->view('templates/footer');
 
     }
 
