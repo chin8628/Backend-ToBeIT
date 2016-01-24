@@ -346,10 +346,10 @@ class Attendees extends CI_Controller {
 
         if ($confirm == 'true'){
             $this->attendees_model->delete_attendee($id);
-            redirect('attendees?alert=1');
+            redirect('../attendees?alert=1');
         }
         else {
-            redirect('attendees/confirm_remove?id='.$id);
+            redirect('../attendees/confirm_remove?id='.$id);
         }
 
     }

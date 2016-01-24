@@ -53,7 +53,7 @@ class Score extends CI_Controller {
             foreach ($room as $key => $value) {
                 $this->Score_model->give_score($value, $score);
             }
-            redirect('score/findmeifucan','refresh');
+            redirect('../score/findmeifucan','refresh');
         }
 
         $this->parser->parse('templates/header_nologged', $data);
